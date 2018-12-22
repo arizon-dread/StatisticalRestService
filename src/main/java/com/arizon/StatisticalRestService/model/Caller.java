@@ -1,6 +1,7 @@
 package com.arizon.StatisticalRestService.model;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 /**
  *
@@ -13,6 +14,8 @@ import javax.persistence.*;
 })
 public class Caller {
 
+    private UUID callerId;
+    private String callerName;
     private String hMACid;
     private String entityType;
     private String callerAddress;

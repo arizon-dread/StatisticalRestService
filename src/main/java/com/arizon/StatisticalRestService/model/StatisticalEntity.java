@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.UUID;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -11,17 +12,17 @@ import static javax.persistence.GenerationType.IDENTITY;
  * Created by arizon on 12/7/17.
  */
 @Entity
-@Table(name="StatisticalEntity", uniqueConstraints = {
+@Table(name = "StatisticalEntity", uniqueConstraints = {
         @UniqueConstraint(columnNames = "id")
 })
-public class StatisticalEntity{
+public class StatisticalEntity {
 
 
     private long id;
     private String entityType;
     private String entityName;
-    private String clientName;
-    private String clientOrgnr;
+    private Double entityValue;
+    private UUID callerId;
     private Date startDate;
     private Date endDate;
     private int occurances;
@@ -39,7 +40,7 @@ public class StatisticalEntity{
     }
 
     @JsonValue
-    @Column(name = "type", nullable = false)
+    @Column(name = "entityType", nullable = false)
     public String getEntityType() {
         return entityType;
     }
@@ -49,7 +50,7 @@ public class StatisticalEntity{
     }
 
     @JsonValue
-    @Column(name = "name", nullable = false)
+    @Column(name = "entityName", nullable = false)
     public String getEntityName() {
         return entityName;
     }
@@ -59,27 +60,27 @@ public class StatisticalEntity{
     }
 
     @JsonValue
-    @Column(name = "client")
-    public String getClientName() {
-        return clientName;
+    @Column(name = "entityValue", nullable = true)
+    public Double getEntityValue() {
+        return entityValue;
     }
 
-    public void setClientName(String clientName) {
-        this.clientName = clientName;
-    }
-
-    @JsonValue
-    @Column(name = "orgnr", nullable = false)
-    public String getClientOrgnr() {
-        return clientOrgnr;
-    }
-
-    public void setClientOrgnr(String clientOrgnr) {
-        this.clientOrgnr = clientOrgnr;
+    public void setEntityValue(Double entityValue) {
+        this.entityValue = entityValue;
     }
 
     @JsonValue
-    @Column(name= "from", nullable = false)
+    @Column(name = "callerId", nullable = false)
+    public UUID getCallerId() {
+        return callerId;
+    }
+
+    public void setCallerId(UUID callerId) {
+        this.callerId = callerId;
+    }
+
+    @JsonValue
+    @Column(name = "from", nullable = false)
     public Date getStartDate() {
         return startDate;
     }
