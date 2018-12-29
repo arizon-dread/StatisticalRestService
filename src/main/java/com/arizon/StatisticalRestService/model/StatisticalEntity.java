@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.List;
 import java.util.UUID;
 
 import static javax.persistence.GenerationType.IDENTITY;
@@ -19,7 +20,7 @@ public class StatisticalEntity {
 
 
     private long id;
-    private String entityType;
+    private EntityType entityType;
     private String entityName;
     private Double entityValue;
     private UUID callerId;
@@ -40,17 +41,19 @@ public class StatisticalEntity {
     }
 
     @JsonValue
-    @Column(name = "entityType", nullable = false)
-    public String getEntityType() {
+    @ManyToOne(targetEntity = com.arizon.StatisticalRestService.model.EntityType.class)
+    //@Column(name = "entityType", nullable = false)
+    public EntityType getEntityType() {
         return entityType;
     }
 
-    public void setEntityType(String entityType) {
+    public void setEntityType(EntityType entityType) {
         this.entityType = entityType;
     }
 
     @JsonValue
-    @Column(name = "entityName", nullable = false)
+    @OneToOne(targetEntity = com.arizon.StatisticalRestService.model.EntityType.class)
+    //@Column(name = "entityName", nullable = false)
     public String getEntityName() {
         return entityName;
     }

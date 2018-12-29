@@ -1,0 +1,14 @@
+spring:
+    application:
+        name: StatisticalRestService
+    jpa:
+        database: POSTGRESQL
+        show-sql: true
+        hibernate:
+            ddl-auto: update
+    datasource:
+        platform: postgres
+        url: jdbc:postgresql://localhost:5432/StatisticalRestService
+        username: statEntityUser
+        password: test123
+        driverClassName: org.postgresql.Driver
