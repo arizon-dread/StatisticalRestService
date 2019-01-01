@@ -2,17 +2,24 @@ package com.arizon.StatisticalRestService.model;
 
 import javax.persistence.*;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 @Entity
 @Table(name = "EntityType", uniqueConstraints = {
         @UniqueConstraint(columnNames = "id")
 })
 public class EntityType {
 
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
+    @Column(name = "id", unique = true, nullable = false)
     private long id;
+
+    @Column(name = "name")
+    //@OneToOne(targetEntity = com.arizon.StatisticalRestService.model.StatisticalEntity.class, mappedBy = "entityType")
     private String name;
 
-    @Id
-    @Column(name = "id", unique = true, nullable = false)
+
     public long getId() {
         return id;
     }
@@ -21,8 +28,6 @@ public class EntityType {
         this.id = id;
     }
 
-    //@Column(name = "name")
-    @OneToOne(targetEntity = com.arizon.StatisticalRestService.model.StatisticalEntity.class, mappedBy = "entityName")
     public String getName() {
         return name;
     }

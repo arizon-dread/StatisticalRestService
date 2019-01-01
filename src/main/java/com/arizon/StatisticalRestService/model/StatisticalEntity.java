@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 import javax.persistence.*;
 import java.sql.Date;
-import java.util.List;
 import java.util.UUID;
 
 import static javax.persistence.GenerationType.IDENTITY;
@@ -19,30 +18,42 @@ import static javax.persistence.GenerationType.IDENTITY;
 public class StatisticalEntity {
 
 
-    private long id;
-    private EntityType entityType;
-    private String entityName;
-    private Double entityValue;
-    private UUID callerId;
-    private Date startDate;
-    private Date endDate;
-    private int occurances;
-
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "id", nullable = false, unique = true)
+    private long id;
+
+    @JsonValue
+    @ManyToOne(targetEntity = EntityType.class)
+    private EntityType entityType;
+    //    private String entityName;
+//    private Double entityValue;
+    @JsonValue
+    @ManyToOne
+    @JoinColumn(name = "callerId")
+    private long callerId;
+
+    @JsonValue
+    @Column(name = "from", nullable = false)
+    private Date startDate;
+
+    @JsonValue
+    @Column(name = "to", nullable = false)
+    private Date endDate;
+
+    @JsonValue
+    @Column(name = "occurances", nullable = false)
+    private int occurances;
+
+
     public long getId() {
         return id;
     }
-
 
     public void setId(long id) {
         this.id = id;
     }
 
-    @JsonValue
-    @ManyToOne(targetEntity = com.arizon.StatisticalRestService.model.EntityType.class)
-    //@Column(name = "entityType", nullable = false)
     public EntityType getEntityType() {
         return entityType;
     }
@@ -51,63 +62,55 @@ public class StatisticalEntity {
         this.entityType = entityType;
     }
 
-    @JsonValue
-    @OneToOne(targetEntity = com.arizon.StatisticalRestService.model.EntityType.class)
-    //@Column(name = "entityName", nullable = false)
-    public String getEntityName() {
-        return entityName;
-    }
+//    @JsonValue
+//    @OneToOne(targetEntity = EntityType.class)
+//    //@Column(name = "entityName", nullable = false)
+//    public String getEntityName() {
+//        return entityName;
+//    }
 
-    public void setEntityName(String entityName) {
-        this.entityName = entityName;
-    }
+//    public void setEntityName(String entityName) {
+//        this.entityName = entityName;
+//    }
 
-    @JsonValue
-    @Column(name = "entityValue", nullable = true)
-    public Double getEntityValue() {
-        return entityValue;
-    }
+//    @JsonValue
+//    @Column(name = "entityValue", nullable = true)
+//    public Double getEntityValue() {
+//        return entityValue;
+//    }
+//
+//    public void setEntityValue(Double entityValue) {
+//        this.entityValue = entityValue;
+//    }
 
-    public void setEntityValue(Double entityValue) {
-        this.entityValue = entityValue;
-    }
 
-    @JsonValue
-    @Column(name = "callerId", nullable = false)
-    public UUID getCallerId() {
+    //    @Column(name = "callerId", nullable = false)
+    public long getCallerId() {
         return callerId;
     }
-
-    public void setCallerId(UUID callerId) {
+    public void setCallerId(long callerId) {
         this.callerId = callerId;
     }
 
-    @JsonValue
-    @Column(name = "from", nullable = false)
+
     public Date getStartDate() {
         return startDate;
     }
-
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
-    @JsonValue
-    @Column(name = "to", nullable = false)
     public Date getEndDate() {
         return endDate;
     }
-
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 
-    @JsonValue
-    @Column(name = "occurances", nullable = false)
+
     public int getOccurances() {
         return occurances;
     }
-
     public void setOccurances(int occurances) {
         this.occurances = occurances;
     }

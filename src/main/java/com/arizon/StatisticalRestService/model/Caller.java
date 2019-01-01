@@ -15,44 +15,47 @@ import java.util.UUID;
 })
 public class Caller {
 
+    @Id
+    //@Column(name = "id", nullable = false, unique = true, updatable = false)
+    @OneToMany(mappedBy = "statisticalEntity.callerId")
     private long callerId;
+
+    @Column(name = "callerName")
     private String callerName;
+
+    @Column(name = "HMACid")
     private String hMACid;
+
+    @ElementCollection
+    @Column(name = "allowed entityTypes", nullable = false)
     private List<EntityType> entityTypes;
+
+    @Column(name ="allowedAddress", nullable = false)
     private String callerAddress;
 
-
-
-
-
-    @Id
-    @Column(name = "id", nullable = false, unique = true, updatable = false)
     public long getCallerId() {
         return callerId;
     }
-
     public void setCallerId(long callerId) {
         this.callerId = callerId;
     }
-    @Column(name = "name")
+
     public String getCallerName() {
         return callerName;
     }
-
     public void setCallerName(String callerName) {
         this.callerName = callerName;
     }
-    @Column(name = "HMACid")
+
+
     public String gethMACid() {
         return hMACid;
     }
-
     public void sethMACid(String hMACid) {
         this.hMACid = hMACid;
     }
 
-    @ElementCollection
-    @Column(name = "allowed entityTypes", nullable = false)
+
     public List<EntityType> getEntityTypes() {
         return entityTypes;
     }
@@ -64,7 +67,6 @@ public class Caller {
         this.entityTypes = entityTypes;
     }
 
-    @Column(name ="allowed addresses", nullable = false)
     public String getCallerAddress() {
         return callerAddress;
     }
