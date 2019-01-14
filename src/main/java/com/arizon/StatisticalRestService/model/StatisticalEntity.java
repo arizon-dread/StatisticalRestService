@@ -3,8 +3,8 @@ package com.arizon.StatisticalRestService.model;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import javax.persistence.*;
-import java.sql.Date;
-import java.util.UUID;
+import java.io.Serializable;
+import java.util.Date;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -15,7 +15,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Table(name = "StatisticalEntity", uniqueConstraints = {
         @UniqueConstraint(columnNames = "id")
 })
-public class StatisticalEntity {
+public class StatisticalEntity implements Serializable {
 
 
     @Id
@@ -24,10 +24,10 @@ public class StatisticalEntity {
     private long id;
 
     @JsonValue
-    @ManyToOne(targetEntity = EntityType.class)
+    @ManyToOne
+    @JoinColumn(name = "EntityTypeId")
     private EntityType entityType;
-    //    private String entityName;
-//    private Double entityValue;
+
     @JsonValue
     @ManyToOne
     @JoinColumn(name = "callerId")
@@ -35,10 +35,12 @@ public class StatisticalEntity {
 
     @JsonValue
     @Column(name = "from", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date startDate;
 
     @JsonValue
     @Column(name = "to", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date endDate;
 
     @JsonValue
@@ -50,41 +52,17 @@ public class StatisticalEntity {
         return id;
     }
 
-    public void setId(long id) {
+    private void setId(long id) {
         this.id = id;
     }
 
     public EntityType getEntityType() {
         return entityType;
     }
-
     public void setEntityType(EntityType entityType) {
         this.entityType = entityType;
     }
 
-//    @JsonValue
-//    @OneToOne(targetEntity = EntityType.class)
-//    //@Column(name = "entityName", nullable = false)
-//    public String getEntityName() {
-//        return entityName;
-//    }
-
-//    public void setEntityName(String entityName) {
-//        this.entityName = entityName;
-//    }
-
-//    @JsonValue
-//    @Column(name = "entityValue", nullable = true)
-//    public Double getEntityValue() {
-//        return entityValue;
-//    }
-//
-//    public void setEntityValue(Double entityValue) {
-//        this.entityValue = entityValue;
-//    }
-
-
-    //    @Column(name = "callerId", nullable = false)
     public long getCallerId() {
         return callerId;
     }

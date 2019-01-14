@@ -1,6 +1,7 @@
 package com.arizon.StatisticalRestService.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 
@@ -13,11 +14,11 @@ import java.util.UUID;
 @Table(name="Caller", uniqueConstraints = {
         @UniqueConstraint(columnNames = "HMACid")
 })
-public class Caller {
+public class Caller implements Serializable {
 
     @Id
-    //@Column(name = "id", nullable = false, unique = true, updatable = false)
-    @OneToMany(mappedBy = "statisticalEntity.callerId")
+    @Column(name = "id", nullable = false, unique = true, updatable = false)
+    //@OneToMany(mappedBy = "statisticalEntity.callerId")
     private long callerId;
 
     @Column(name = "callerName")
@@ -27,6 +28,7 @@ public class Caller {
     private String hMACid;
 
     @ElementCollection
+    //@ManyToMany(mappedBy = "EntityType")
     @Column(name = "allowed entityTypes", nullable = false)
     private List<EntityType> entityTypes;
 

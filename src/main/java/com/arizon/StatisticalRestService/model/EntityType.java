@@ -2,13 +2,17 @@ package com.arizon.StatisticalRestService.model;
 
 import javax.persistence.*;
 
+import java.io.Serializable;
+import java.util.List;
+import java.util.Set;
+
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name = "EntityType", uniqueConstraints = {
         @UniqueConstraint(columnNames = "id")
 })
-public class EntityType {
+public class EntityType implements Serializable {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -19,12 +23,16 @@ public class EntityType {
     //@OneToOne(targetEntity = com.arizon.StatisticalRestService.model.StatisticalEntity.class, mappedBy = "entityType")
     private String name;
 
+    @Column
+    @ManyToMany(targetEntity = Caller.class)
+    private Set<Caller> callers;
+
 
     public long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    private void setId(long id) {
         this.id = id;
     }
 
