@@ -11,6 +11,6 @@ import java.util.UUID;
 @Repository
 public interface CallerRepository extends JpaRepository<Caller, Long> {
     Caller findById(long id);
-    //List<Caller> findCallersByEntityType(EntityType entityTypes);
+    //List<Caller> findByEntityType(EntityType entityTypes);
     Caller findByCallerName(String callerName);
 }

@@ -29,24 +29,25 @@ public class StatisticalEntity implements Serializable {
     private EntityType entityType;
 
     @JsonValue
-    @ManyToOne
-    @JoinColumn(name = "callerId")
-    private long callerId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "caller")
+    private Caller caller;
 
     @JsonValue
-    @Column(name = "from", nullable = false)
+    @Column(name = "timestamp", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
-    private Date startDate;
+    private Date timestamp;
 
-    @JsonValue
+    /*@JsonValue
     @Column(name = "to", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
-    private Date endDate;
+    private Date endDate;*/
 
     @JsonValue
     @Column(name = "occurances", nullable = false)
     private int occurances;
 
+    public StatisticalEntity(){}
 
     public long getId() {
         return id;
@@ -63,27 +64,27 @@ public class StatisticalEntity implements Serializable {
         this.entityType = entityType;
     }
 
-    public long getCallerId() {
-        return callerId;
+    public Caller getCaller() {
+        return caller;
     }
-    public void setCallerId(long callerId) {
-        this.callerId = callerId;
-    }
-
-
-    public Date getStartDate() {
-        return startDate;
-    }
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
+    public void setCallerId(Caller caller) {
+        this.caller = caller;
     }
 
-    public Date getEndDate() {
+
+    public Date getTimestamp() {
+        return timestamp;
+    }
+    public void setTimestamp(Date timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    /*public Date getEndDate() {
         return endDate;
     }
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
-    }
+    }*/
 
 
     public int getOccurances() {

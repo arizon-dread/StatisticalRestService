@@ -17,6 +17,7 @@ import java.util.UUID;
 public class Caller implements Serializable {
 
     @Id
+    @GeneratedValue
     @Column(name = "id", nullable = false, unique = true, updatable = false)
     //@OneToMany(mappedBy = "statisticalEntity.callerId")
     private long callerId;
@@ -28,13 +29,14 @@ public class Caller implements Serializable {
     private String hMACid;
 
     @ElementCollection
-    //@ManyToMany(mappedBy = "EntityType")
+    @OneToMany
     @Column(name = "allowed entityTypes", nullable = false)
     private List<EntityType> entityTypes;
 
     @Column(name ="allowedAddress", nullable = false)
     private String callerAddress;
 
+    public Caller() {}
     public long getCallerId() {
         return callerId;
     }

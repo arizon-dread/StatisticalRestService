@@ -27,6 +27,7 @@ public class EntityType implements Serializable {
     @ManyToMany(targetEntity = Caller.class)
     private Set<Caller> callers;
 
+    public EntityType(){}
 
     public long getId() {
         return id;
