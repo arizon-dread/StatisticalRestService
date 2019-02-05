@@ -12,7 +12,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name="Caller", uniqueConstraints = {
-        @UniqueConstraint(columnNames = "HMACid")
+        @UniqueConstraint(columnNames = "id")
 })
 public class Caller implements Serializable {
 
@@ -25,8 +25,8 @@ public class Caller implements Serializable {
     @Column(name = "callerName")
     private String callerName;
 
-    @Column(name = "HMACid")
-    private String hMACid;
+//    @Column(name = "HMACid")
+//    private String hMACid;
 
     @ElementCollection
     @OneToMany
@@ -52,12 +52,12 @@ public class Caller implements Serializable {
     }
 
 
-    public String gethMACid() {
-        return hMACid;
-    }
-    public void sethMACid(String hMACid) {
-        this.hMACid = hMACid;
-    }
+//    public String gethMACid() {
+//        return hMACid;
+//    }
+//    public void sethMACid(String hMACid) {
+//        this.hMACid = hMACid;
+//    }
 
 
     public List<EntityType> getEntityTypes() {

@@ -23,9 +23,9 @@ public class EntityType implements Serializable {
     //@OneToOne(targetEntity = com.arizon.StatisticalRestService.model.StatisticalEntity.class, mappedBy = "entityType")
     private String name;
 
-    @Column
-    @ManyToMany(targetEntity = Caller.class)
-    private Set<Caller> callers;
+//    @Column
+//    @ManyToMany(targetEntity = Caller.class)
+//    private Set<Caller> callers;
 
     public EntityType(){}
 
