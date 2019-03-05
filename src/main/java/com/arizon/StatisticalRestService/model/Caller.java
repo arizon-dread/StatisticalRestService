@@ -1,9 +1,11 @@
 package com.arizon.StatisticalRestService.model;
 
+
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
-import java.util.UUID;
+import java.util.Set;
+
+import static javax.persistence.GenerationType.IDENTITY;
 
 /**
  *
@@ -17,31 +19,23 @@ import java.util.UUID;
 public class Caller implements Serializable {
 
     @Id
-    @GeneratedValue
-    @Column(name = "id", nullable = false, unique = true, updatable = false)
-    //@OneToMany(mappedBy = "statisticalEntity.callerId")
-    private long callerId;
+    @GeneratedValue(strategy = IDENTITY)
+    private long id;
 
-    @Column(name = "callerName")
     private String callerName;
 
-//    @Column(name = "HMACid")
-//    private String hMACid;
-
-    @ElementCollection
-    @OneToMany
-    @Column(name = "allowed entityTypes", nullable = false)
-    private List<EntityType> entityTypes;
+    @OneToMany(cascade = CascadeType.PERSIST)
+    private Set<EntityType> entitytypes;
 
     @Column(name ="allowedAddress", nullable = false)
     private String callerAddress;
 
     public Caller() {}
     public long getCallerId() {
-        return callerId;
+        return id;
     }
-    public void setCallerId(long callerId) {
-        this.callerId = callerId;
+    public void setCallerId(long id) {
+        this.id = id;
     }
 
     public String getCallerName() {
@@ -52,23 +46,15 @@ public class Caller implements Serializable {
     }
 
 
-//    public String gethMACid() {
-//        return hMACid;
-//    }
-//    public void sethMACid(String hMACid) {
-//        this.hMACid = hMACid;
-//    }
-
-
-    public List<EntityType> getEntityTypes() {
-        return entityTypes;
+    public Set<EntityType> getEntitytypes() {
+        return entitytypes;
     }
 
-    public void setEntityTypes(EntityType entityType) {
-        this.entityTypes.add(entityType);
+    public void setEntitytypes(EntityType entityType) {
+        this.entitytypes.add(entityType);
     }
-    public void setentityTypes(List<EntityType> entityTypes) {
-        this.entityTypes = entityTypes;
+    public void setentityTypes(Set<EntityType> entityTypes) {
+        this.entitytypes = entityTypes;
     }
 
     public String getCallerAddress() {

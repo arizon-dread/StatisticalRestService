@@ -5,12 +5,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
 public class VersionResponse {
     String version = "";
     private Logger log = LoggerFactory.getLogger(this.getClass());
     public VersionResponse() {
+
         final Properties properties = new Properties();
         try {
             properties.load(this.getClass().getClassLoader().getResourceAsStream("application.properties"));

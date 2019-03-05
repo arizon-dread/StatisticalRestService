@@ -12,6 +12,6 @@ import java.util.List;
 @Repository
 public interface StatisticalEntityRepository extends CrudRepository<StatisticalEntity, Long> {
 
-    StatisticalEntity findByEntityType(EntityType entityTypeId);
+    StatisticalEntity findByEntitytype(EntityType entitytypeId);
     //List<StatisticalEntity> findStatisticalEntitiesBetween(Date fromDate, Date toDate);
 }

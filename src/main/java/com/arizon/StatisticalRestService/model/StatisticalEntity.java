@@ -1,7 +1,5 @@
 package com.arizon.StatisticalRestService.model;
 
-import com.fasterxml.jackson.annotation.JsonValue;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -23,17 +21,15 @@ public class StatisticalEntity implements Serializable {
     @Column(name = "id", nullable = false, unique = true)
     private long id;
 
-    @JsonValue
-    @ManyToOne
-    @JoinColumn(name = "EntityTypeId")
-    private EntityType entityType;
+    //@JsonValue
+    private EntityType entitytype;
 
-    @JsonValue
+    //@JsonValue
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "caller")
+    @JoinColumn(name = "CallerId")
     private Caller caller;
 
-    @JsonValue
+    //@JsonValue
     @Column(name = "timestamp", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date timestamp;
@@ -43,7 +39,7 @@ public class StatisticalEntity implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date endDate;*/
 
-    @JsonValue
+    //@JsonValue
     @Column(name = "occurances", nullable = false)
     private int occurances;
 
@@ -57,17 +53,17 @@ public class StatisticalEntity implements Serializable {
         this.id = id;
     }
 
-    public EntityType getEntityType() {
-        return entityType;
+    public EntityType getEntitytype() {
+        return entitytype;
     }
-    public void setEntityType(EntityType entityType) {
-        this.entityType = entityType;
+    public void setEntitytype(EntityType entitytype) {
+        this.entitytype = entitytype;
     }
 
     public Caller getCaller() {
         return caller;
     }
-    public void setCallerId(Caller caller) {
+    public void setCaller(Caller caller) {
         this.caller = caller;
     }
 
