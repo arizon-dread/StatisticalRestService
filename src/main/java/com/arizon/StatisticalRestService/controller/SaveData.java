@@ -1,6 +1,7 @@
 package com.arizon.StatisticalRestService.controller;
 
 import com.arizon.StatisticalRestService.Repository.CallerRepository;
+import com.arizon.StatisticalRestService.Repository.StatisticalEntityRepository;
 import com.arizon.StatisticalRestService.model.Caller;
 import com.arizon.StatisticalRestService.model.StatisticalEntity;
 import com.arizon.StatisticalRestService.util.HMACHelper;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by arizon on 12/7/17.
@@ -27,14 +29,30 @@ public class SaveData {
     @Autowired
     EntityManager entityManager;
 
+    @Autowired
+    CallerRepository callerRepo;
+
+    @Autowired
+    StatisticalEntityRepository statEntityRepo;
+
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/saveData", method = RequestMethod.POST, consumes = "application/json")
-    public void saveStatisticalEntities(@RequestParam(value="caller") String caller,
+    public void saveStatisticalEntities(@RequestParam(value="caller") Long callerId,
                                         @RequestBody List<StatisticalEntity> payload) {
         //TODO: verify caller
-        //TODO: Save payload
 
-
+        Optional<Caller> optionalCaller  = callerRepo.findById(callerId);
+        Caller caller = optionalCaller.get();
+        if (caller.getCallerName() != null) {
+            //TODO: Save payload
+            for (StatisticalEntity entity : payload) {
+                if(statEntityRepo.existsById(entity.getId())) {
+                    entityManager.merge(entity);
+                } else {
+                    entityManager.persist(entity);
+                }
+            }
+        }
 
 
 
