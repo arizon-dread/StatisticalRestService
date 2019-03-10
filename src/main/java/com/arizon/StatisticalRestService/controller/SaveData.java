@@ -1,9 +1,11 @@
 package com.arizon.StatisticalRestService.controller;
 
+import com.arizon.StatisticalRestService.DTO.StatisticalEntityJsonToStatisticalEntity;
 import com.arizon.StatisticalRestService.Repository.CallerRepository;
 import com.arizon.StatisticalRestService.Repository.StatisticalEntityRepository;
 import com.arizon.StatisticalRestService.model.Caller;
 import com.arizon.StatisticalRestService.model.StatisticalEntity;
+import com.arizon.StatisticalRestService.model.StatisticalEntityJson;
 import com.arizon.StatisticalRestService.util.HMACHelper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
@@ -35,21 +37,25 @@ public class SaveData {
     @Autowired
     StatisticalEntityRepository statEntityRepo;
 
+    @Autowired
+    StatisticalEntityJsonToStatisticalEntity statEntityTranslator;
+
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/saveData", method = RequestMethod.POST, consumes = "application/json")
     public void saveStatisticalEntities(@RequestParam(value="caller") Long callerId,
-                                        @RequestBody List<StatisticalEntity> payload) {
+                                        @RequestBody List<StatisticalEntityJson> payload) {
         //TODO: verify caller
 
         Optional<Caller> optionalCaller  = callerRepo.findById(callerId);
         Caller caller = optionalCaller.get();
         if (caller.getCallerName() != null) {
             //TODO: Save payload
-            for (StatisticalEntity entity : payload) {
-                if(statEntityRepo.existsById(entity.getId())) {
-                    entityManager.merge(entity);
+            for (StatisticalEntityJson jsonEntity : payload) {
+                StatisticalEntity dbEntity = statEntityTranslator.getStatisticalEntityFromJson(jsonEntity);
+                if(statEntityRepo.existsById(dbEntity.getId())) {
+                    entityManager.merge(dbEntity);
                 } else {
-                    entityManager.persist(entity);
+                    entityManager.persist(dbEntity);
                 }
             }
         }
