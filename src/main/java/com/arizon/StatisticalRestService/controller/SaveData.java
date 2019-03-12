@@ -42,7 +42,7 @@ public class SaveData {
 
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/saveData", method = RequestMethod.POST, consumes = "application/json")
-    public void saveStatisticalEntities(@RequestParam(value="caller") Long callerId,
+    public void saveStatisticalEntities(@RequestParam(value="caller") long callerId,
                                         @RequestBody List<StatisticalEntityJson> payload) {
         //TODO: verify caller
 
@@ -51,7 +51,7 @@ public class SaveData {
         if (caller.getCallerName() != null) {
             //TODO: Save payload
             for (StatisticalEntityJson jsonEntity : payload) {
-                StatisticalEntity dbEntity = statEntityTranslator.getStatisticalEntityFromJson(jsonEntity);
+                StatisticalEntity dbEntity = statEntityTranslator.getStatisticalEntityFromJson(jsonEntity, callerId);
                 if(statEntityRepo.existsById(dbEntity.getId())) {
                     entityManager.merge(dbEntity);
                 } else {

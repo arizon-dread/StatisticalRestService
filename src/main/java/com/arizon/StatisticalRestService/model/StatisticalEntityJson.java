@@ -11,13 +11,13 @@ public class StatisticalEntityJson {
     private EntityType entityType;
 
     @JsonValue
-    private Caller caller;
-
-    @JsonValue
     private Date timeStamp;
 
     @JsonValue
     private int occurances;
+
+    @JsonValue
+    private double value;
 
     public EntityType getEntityType() {
         return entityType;
@@ -25,14 +25,6 @@ public class StatisticalEntityJson {
 
     public void setEntityType(EntityType entityType) {
         this.entityType = entityType;
-    }
-
-    public Caller getCaller() {
-        return caller;
-    }
-
-    public void setCaller(Caller caller) {
-        this.caller = caller;
     }
 
     public Date getTimeStamp() {
@@ -49,5 +41,13 @@ public class StatisticalEntityJson {
 
     public void setOccurances(int occurances) {
         this.occurances = occurances;
+    }
+
+    public double getValue() {
+        return value;
+    }
+
+    public void setValue(double value) {
+        this.value = value;
     }
 }

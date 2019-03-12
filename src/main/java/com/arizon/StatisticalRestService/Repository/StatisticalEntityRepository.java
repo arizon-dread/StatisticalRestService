@@ -16,5 +16,5 @@ public interface StatisticalEntityRepository extends CrudRepository<StatisticalE
     StatisticalEntity findByEntitytype(EntityType entitytypeId);
 
     List<StatisticalEntity> findAllByCaller(long callerId);
-    //List<StatisticalEntity> findStatisticalEntitiesBetween(Date fromDate, Date toDate);
+    //List<StatisticalEntity> findBetween(Date fromDate, Date toDate);
 }

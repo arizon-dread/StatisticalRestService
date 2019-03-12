@@ -10,10 +10,10 @@ public class StatisticalEntityJsonToStatisticalEntity {
 
     public StatisticalEntityJsonToStatisticalEntity() {}
 
-    public StatisticalEntity getStatisticalEntityFromJson(StatisticalEntityJson jsonObj) {
+    public StatisticalEntity getStatisticalEntityFromJson(StatisticalEntityJson jsonObj, long callerId) {
         StatisticalEntity statEntity = new StatisticalEntity();
 
-        statEntity.setCaller(jsonObj.getCaller());
+        statEntity.setCaller(callerId);
         statEntity.setEntitytype(jsonObj.getEntityType());
         statEntity.setOccurances(jsonObj.getOccurances());
         statEntity.setTimestamp(jsonObj.getTimeStamp());
@@ -23,7 +23,6 @@ public class StatisticalEntityJsonToStatisticalEntity {
     public StatisticalEntityJson getStatisticalEntityJsonFromDbObj(StatisticalEntity dbEntity) {
         StatisticalEntityJson jsonObj = new StatisticalEntityJson();
 
-        jsonObj.setCaller(dbEntity.getCaller());
         jsonObj.setEntityType(dbEntity.getEntitytype());
         jsonObj.setTimeStamp(dbEntity.getTimestamp());
         jsonObj.setOccurances(dbEntity.getOccurances());

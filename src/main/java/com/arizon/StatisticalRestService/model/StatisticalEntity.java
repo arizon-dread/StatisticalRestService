@@ -43,6 +43,9 @@ public class StatisticalEntity implements Serializable {
     @Column(name = "occurances", nullable = false)
     private int occurances;
 
+    @Column(name = "value")
+    private double value;
+
     public StatisticalEntity(){}
 
     public long getId() {
@@ -63,7 +66,7 @@ public class StatisticalEntity implements Serializable {
     public Caller getCaller() {
         return caller;
     }
-    public void setCaller(Caller caller) {
+    public void setCaller(long callerId) {
         this.caller = caller;
     }
 
@@ -88,5 +91,13 @@ public class StatisticalEntity implements Serializable {
     }
     public void setOccurances(int occurances) {
         this.occurances = occurances;
+    }
+
+    public double getValue() {
+        return value;
+    }
+
+    public void setValue(double value) {
+        this.value = value;
     }
 }
