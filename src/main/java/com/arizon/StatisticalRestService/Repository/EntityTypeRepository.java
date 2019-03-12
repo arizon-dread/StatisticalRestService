@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface EntityTypeRepository extends CrudRepository<EntityType, Long> {
-    EntityType findByName(String name);
+    EntityType findByUnit(String unit);
 
 
 }
