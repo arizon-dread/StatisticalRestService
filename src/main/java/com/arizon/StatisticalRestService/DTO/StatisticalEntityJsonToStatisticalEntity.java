@@ -1,20 +1,24 @@
 package com.arizon.StatisticalRestService.DTO;
+import com.arizon.StatisticalRestService.Repository.EntityTypeRepository;
+import com.arizon.StatisticalRestService.model.EntityType;
 import com.arizon.StatisticalRestService.model.StatisticalEntity;
 import com.arizon.StatisticalRestService.model.StatisticalEntityJson;
-import org.springframework.context.annotation.Bean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class StatisticalEntityJsonToStatisticalEntity {
 
 
+    @Autowired
+    private EntityTypeRepository entityTypeRepository;
     public StatisticalEntityJsonToStatisticalEntity() {}
 
     public StatisticalEntity getStatisticalEntityFromJson(StatisticalEntityJson jsonObj, long callerId) {
         StatisticalEntity statEntity = new StatisticalEntity();
 
         statEntity.setCaller(callerId);
-        statEntity.setEntitytype(jsonObj.getEntityType());
+        statEntity.setEntitytype(new EntityType(jsonObj.getEntityType()));
         statEntity.setOccurances(jsonObj.getOccurances());
         statEntity.setTimestamp(jsonObj.getTimeStamp());
 
@@ -23,7 +27,7 @@ public class StatisticalEntityJsonToStatisticalEntity {
     public StatisticalEntityJson getStatisticalEntityJsonFromDbObj(StatisticalEntity dbEntity) {
         StatisticalEntityJson jsonObj = new StatisticalEntityJson();
 
-        jsonObj.setEntityType(dbEntity.getEntitytype());
+        jsonObj.setEntityType(dbEntity.getEntitytype().getUnit());
         jsonObj.setTimeStamp(dbEntity.getTimestamp());
         jsonObj.setOccurances(dbEntity.getOccurances());
 

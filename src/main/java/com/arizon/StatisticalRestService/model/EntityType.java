@@ -3,8 +3,6 @@ package com.arizon.StatisticalRestService.model;
 import javax.persistence.*;
 
 import java.io.Serializable;
-import java.util.List;
-import java.util.Set;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -19,11 +17,16 @@ public class EntityType implements Serializable {
     @Column(name = "id", unique = true, nullable = false)
     private long id;
 
-    //@Column(name = "name")
+    //@Column(unit = "unit")
     //@OneToOne(targetEntity = com.arizon.StatisticalRestService.model.StatisticalEntity.class, mappedBy = "entityType")
-    private String name;
+    private String unit;
+
 
     public EntityType(){}
+    public EntityType(String unit){
+        EntityType entityType = new EntityType();
+        entityType.setUnit(unit);
+    }
 
     public long getId() {
         return id;
@@ -33,11 +36,11 @@ public class EntityType implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUnit() {
+        return unit;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUnit(String unit) {
+        this.unit = unit;
     }
 }

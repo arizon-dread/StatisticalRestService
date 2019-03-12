@@ -8,7 +8,7 @@ public class StatisticalEntityJson {
     public StatisticalEntityJson(){}
 
     @JsonValue
-    private EntityType entityType;
+    private String entityTypeName;
 
     @JsonValue
     private Date timeStamp;
@@ -19,12 +19,12 @@ public class StatisticalEntityJson {
     @JsonValue
     private double value;
 
-    public EntityType getEntityType() {
-        return entityType;
+    public String getEntityType() {
+        return entityTypeName;
     }
 
-    public void setEntityType(EntityType entityType) {
-        this.entityType = entityType;
+    public void setEntityType(String entityTypeName) {
+        this.entityTypeName = entityTypeName;
     }
 
     public Date getTimeStamp() {
