@@ -6,6 +6,7 @@ import com.arizon.StatisticalRestService.Repository.StatisticalEntityRepository;
 import com.arizon.StatisticalRestService.model.Caller;
 import com.arizon.StatisticalRestService.model.StatisticalEntity;
 import com.arizon.StatisticalRestService.model.StatisticalEntityJson;
+import com.arizon.StatisticalRestService.service.PersistenceService;
 import com.arizon.StatisticalRestService.util.HMACHelper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
@@ -28,8 +29,6 @@ import java.util.Optional;
 public class SaveData {
 
     private Logger log = LoggerFactory.getLogger(this.getClass());
-    @Autowired
-    EntityManager entityManager;
 
     @Autowired
     CallerRepository callerRepo;
@@ -39,23 +38,25 @@ public class SaveData {
 
     @Autowired
     StatisticalEntityJsonToStatisticalEntity statEntityTranslator;
+    @Autowired
+    PersistenceService persistenceService;
 
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/saveData", method = RequestMethod.POST, consumes = "application/json")
     public void saveStatisticalEntities(@RequestParam(value="caller") long callerId,
-                                        @RequestBody List<StatisticalEntityJson> payload) {
+                                        @RequestBody StatisticalEntityJson[] payload) {
         //TODO: verify caller
 
         Optional<Caller> optionalCaller  = callerRepo.findById(callerId);
         Caller caller = optionalCaller.get();
         if (caller.getCallerName() != null) {
             //TODO: Save payload
-            for (StatisticalEntityJson jsonEntity : payload) {
-                StatisticalEntity dbEntity = statEntityTranslator.getStatisticalEntityFromJson(jsonEntity, callerId);
+            for (int i = 0; i < payload.length; i++) {
+                StatisticalEntity dbEntity = statEntityTranslator.getStatisticalEntityFromJson(payload[i], callerId);
                 if(statEntityRepo.existsById(dbEntity.getId())) {
-                    entityManager.merge(dbEntity);
+                    persistenceService.merge(dbEntity);
                 } else {
-                    entityManager.persist(dbEntity);
+                    persistenceService.persist(dbEntity);
                 }
             }
         }

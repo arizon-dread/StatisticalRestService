@@ -2,6 +2,7 @@ package com.arizon.StatisticalRestService.Repository;
 
 import com.arizon.StatisticalRestService.model.EntityType;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 
