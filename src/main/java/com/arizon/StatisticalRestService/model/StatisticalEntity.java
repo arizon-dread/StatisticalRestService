@@ -71,10 +71,10 @@ public class StatisticalEntity implements Serializable {
     }
 
 
-    public Date getTimestamp() {
+    public Date getTimeStamp() {
         return timestamp;
     }
-    public void setTimestamp(Date timestamp) {
+    public void setTimeStamp(Date timestamp) {
         this.timestamp = timestamp;
     }
 

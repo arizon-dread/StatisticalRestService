@@ -20,7 +20,7 @@ public class StatisticalEntityJsonToStatisticalEntity {
         statEntity.setCaller(callerId);
         statEntity.setEntitytype(new EntityType(jsonObj.getEntityType()));
         statEntity.setOccurances(jsonObj.getOccurances());
-        statEntity.setTimestamp(jsonObj.getTimeStamp());
+        statEntity.setTimeStamp(jsonObj.getTimeStamp());
 
         return statEntity;
     }
@@ -28,7 +28,7 @@ public class StatisticalEntityJsonToStatisticalEntity {
         StatisticalEntityJson jsonObj = new StatisticalEntityJson();
 
         jsonObj.setEntityType(dbEntity.getEntitytype().getUnit());
-        jsonObj.setTimeStamp(dbEntity.getTimestamp());
+        jsonObj.setTimeStamp(dbEntity.getTimeStamp());
         jsonObj.setOccurances(dbEntity.getOccurances());
 
         return jsonObj;
