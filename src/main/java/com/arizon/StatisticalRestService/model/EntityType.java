@@ -24,8 +24,7 @@ public class EntityType implements Serializable {
 
     public EntityType(){}
     public EntityType(String unit){
-        EntityType entityType = new EntityType();
-        entityType.setUnit(unit);
+        this.setUnit(unit);
     }
 
     public long getId() {

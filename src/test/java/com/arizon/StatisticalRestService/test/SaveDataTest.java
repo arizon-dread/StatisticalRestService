@@ -2,6 +2,8 @@ package com.arizon.StatisticalRestService.test;
 
 import com.arizon.StatisticalRestService.Repository.CallerRepository;
 import com.arizon.StatisticalRestService.Repository.EntityTypeRepository;
+import com.arizon.StatisticalRestService.Repository.StatisticalEntityRepository;
+import com.arizon.StatisticalRestService.StatisticalRestServiceApplication;
 import com.arizon.StatisticalRestService.model.Caller;
 import com.arizon.StatisticalRestService.model.EntityType;
 import com.arizon.StatisticalRestService.model.StatisticalEntity;
@@ -15,7 +17,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.persistence.EntityManager;
 
@@ -27,16 +31,21 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import static org.junit.Assert.*;
 
-@RunWith(SpringJUnit4ClassRunner.class)
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = StatisticalRestServiceApplication.class)
 public class SaveDataTest {
     //process-resources spring-boot:run
 
     @Autowired
     PersistenceService ps;
+
+    @Autowired
+    StatisticalEntityRepository repo;
 
     @Before
     public void setUp() throws Exception {
@@ -47,13 +56,15 @@ public class SaveDataTest {
         ps.persist(grams);
         ps.persist(degrees);
 
-
         Caller caller = new Caller();
         caller.setCallerName("localhost");
         caller.setCallerAddress("127.0.0.1");
         Set<EntityType> entityTypes = new HashSet<>();
-        caller.setEntitytypes(grams);
-        caller.setEntitytypes(degrees);
+        entityTypes.add(grams);
+        entityTypes.add(degrees);
+        caller.setentityTypes(entityTypes);
+
+
         ps.persist(caller);
     }
 
@@ -69,7 +80,7 @@ public class SaveDataTest {
 
             StatisticalEntityJson entity = new StatisticalEntityJson();
 
-            DateFormat df = new SimpleDateFormat("yyyy-MM-ddTHH:mm:ss");
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String strDate = df.format(new Date());
             Date date = df.parse(strDate);
 
@@ -92,7 +103,13 @@ public class SaveDataTest {
             os.flush();
 
             assert conn.getResponseCode() == HttpURLConnection.HTTP_CREATED;
+            long l = 1;
+            Optional<StatisticalEntity> persistedEntity = repo.findById(l);
 
+            StatisticalEntity retrievedEntity = persistedEntity.get();
+            assert retrievedEntity.getEntitytype().getUnit() == entity.getEntityType();
+            assert retrievedEntity.getTimeStamp() == entity.getTimeStamp();
+            assert retrievedEntity.getValue() == entity.getValue();
         } catch (java.io.IOException ioe) {
 
         } catch (java.text.ParseException parseExc) {

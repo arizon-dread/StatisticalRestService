@@ -24,7 +24,7 @@ public class Caller implements Serializable {
 
     private String callerName;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany//(cascade = CascadeType.PERSIST)
     private Set<EntityType> entitytypes;
 
     @Column(name ="allowedAddress", nullable = false)
@@ -50,7 +50,7 @@ public class Caller implements Serializable {
         return entitytypes;
     }
 
-    public void setEntitytypes(EntityType entityType) {
+    public void setEntitytype(EntityType entityType) {
         this.entitytypes.add(entityType);
     }
     public void setentityTypes(Set<EntityType> entityTypes) {
@@ -62,6 +62,6 @@ public class Caller implements Serializable {
     }
 
     public void setCallerAddress(String callerAddresses) {
-        this.callerAddress = callerAddress;
+        this.callerAddress = callerAddresses;
     }
 }
