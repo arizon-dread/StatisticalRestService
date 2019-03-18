@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -32,11 +33,23 @@ public class GetData {
 
     //TODO: create crudmethods in the StatisticalEntityRepository matching methods.
     @RequestMapping(value = "/getAllEntities", method = RequestMethod.GET)
-    public List<StatisticalEntityJson> getAllEntities(@RequestParam(value="caller")long callerId) {
+    public List<StatisticalEntityJson> getAllEntities(@RequestParam(value = "caller") long callerId) {
 
         List<StatisticalEntityJson> entities = new ArrayList<>();
 
         for (StatisticalEntity entity : entityRepo.findAllByCaller(callerId)) {
+            entities.add(translator.getStatisticalEntityJsonFromDbObj(entity));
+        }
+
+        return entities;
+    }
+
+    @RequestMapping(value = "getEntitiesBetween", method = RequestMethod.GET)
+    public List<StatisticalEntityJson> getEntitiesBetween(@RequestParam(value="caller") long callerId, @RequestParam(value = "from") Date from, @RequestParam(value = "to") Date to) {
+
+        List<StatisticalEntityJson> entities = new ArrayList<>();
+
+        for (StatisticalEntity entity : entityRepo.findByTimestampBetween(callerId, from, to)) {
             entities.add(translator.getStatisticalEntityJsonFromDbObj(entity));
         }
 

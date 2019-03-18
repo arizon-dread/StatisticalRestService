@@ -1,7 +1,5 @@
 package com.arizon.StatisticalRestService.test;
 
-import com.arizon.StatisticalRestService.Repository.CallerRepository;
-import com.arizon.StatisticalRestService.Repository.EntityTypeRepository;
 import com.arizon.StatisticalRestService.Repository.StatisticalEntityRepository;
 import com.arizon.StatisticalRestService.StatisticalRestServiceApplication;
 import com.arizon.StatisticalRestService.model.Caller;
@@ -9,21 +7,15 @@ import com.arizon.StatisticalRestService.model.EntityType;
 import com.arizon.StatisticalRestService.model.StatisticalEntity;
 import com.arizon.StatisticalRestService.model.StatisticalEntityJson;
 import com.arizon.StatisticalRestService.service.PersistenceService;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ArrayNode;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.persistence.EntityManager;
-
-import java.io.IOException;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -33,8 +25,6 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
-
-import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = StatisticalRestServiceApplication.class)
@@ -62,7 +52,7 @@ public class SaveDataTest {
         Set<EntityType> entityTypes = new HashSet<>();
         entityTypes.add(grams);
         entityTypes.add(degrees);
-        caller.setentityTypes(entityTypes);
+        caller.setEntityTypes(entityTypes);
 
 
         ps.persist(caller);

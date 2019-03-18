@@ -21,25 +21,16 @@ public class StatisticalEntity implements Serializable {
     @Column(name = "id", nullable = false, unique = true)
     private long id;
 
-    //@JsonValue
     private EntityType entitytype;
 
-    //@JsonValue
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CallerId")
     private Caller caller;
 
-    //@JsonValue
     @Column(name = "timestamp", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date timestamp;
 
-    /*@JsonValue
-    @Column(name = "to", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date endDate;*/
-
-    //@JsonValue
     @Column(name = "occurances", nullable = false)
     private int occurances;
 
@@ -66,7 +57,7 @@ public class StatisticalEntity implements Serializable {
     public Caller getCaller() {
         return caller;
     }
-    public void setCaller(long callerId) {
+    public void setCaller(Caller caller) {
         this.caller = caller;
     }
 
