@@ -7,19 +7,14 @@ import com.arizon.StatisticalRestService.model.Caller;
 import com.arizon.StatisticalRestService.model.StatisticalEntity;
 import com.arizon.StatisticalRestService.model.StatisticalEntityJson;
 import com.arizon.StatisticalRestService.service.PersistenceService;
-import com.arizon.StatisticalRestService.util.HMACHelper;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.EntityManager;
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -43,41 +38,54 @@ public class SaveData {
 
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/saveData", method = RequestMethod.POST, consumes = "application/json")
-    public void saveStatisticalEntities(@RequestParam(value="caller") long callerId,
-                                        @RequestBody StatisticalEntityJson[] payload) {
+    public ResponseEntity<String> saveStatisticalEntities(@RequestParam(value = "callerId", required = false) long callerId,
+                                                          @RequestParam(value = "callerName", required = false) String callerName,
+                                                          @RequestBody StatisticalEntityJson[] payload) {
         //TODO: verify caller
+        Long callerIdValue = callerId;
+        if (callerIdValue == null && StringUtils.isEmpty(callerName)) {
+            return new ResponseEntity<String>("Missing request parameter, callerId or callerName", HttpStatus.BAD_REQUEST);
+        }
+        boolean persisted = false;
 
-        Optional<Caller> optionalCaller  = callerRepo.findById(callerId);
-        Caller caller = optionalCaller.get();
-        if (caller.getCallerName() != null) {
-            //TODO: Save payload
-            for (int i = 0; i < payload.length; i++) {
-                StatisticalEntity dbEntity = statEntityTranslator.getStatisticalEntityFromJson(payload[i], callerId);
-                if(statEntityRepo.existsById(dbEntity.getId())) {
-                    persistenceService.merge(dbEntity);
-                } else {
-                    persistenceService.persist(dbEntity);
-                }
+        Caller caller;
+
+        //if the callerIndication is byId, we persist with this method.
+        if (callerIdValue != null) {
+            Optional<Caller> optionalCaller = callerRepo.findById(callerId);
+            caller = optionalCaller.get();
+
+            if (!StringUtils.isEmpty(caller.getCallerName())) {
+                persisted = persistEntity(payload, caller);
+            }
+
+        } else if (!StringUtils.isEmpty(callerName)) {
+            caller = callerRepo.findByCallerName(callerName); //TODO: toLower?
+            if (caller.getCallerName().equals(callerName)) {
+                persisted = persistEntity(payload, caller);
             }
         }
-
-
-
-
-
-
-
-
-        //        boolean validCall = false;
-        //TODO: get raw json message from payload
-//        ObjectMapper mapper = new ObjectMapper();
-//        ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());
-//        try {
-//            String jsonPayload = writer.writeValueAsString(payload);
-//            //validCall = HMACHelper.verifyHmac(jsonPayload, hmacHash, caller);
-//        } catch (JsonProcessingException e) {
-//            log.error(""+e.getStackTrace());
-//        }
+        if (persisted) {
+            return new ResponseEntity<String>("Persistence successful", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<String>("Persistence failed", HttpStatus.UNPROCESSABLE_ENTITY);
+        }
 
     }
+
+    private boolean persistEntity(StatisticalEntityJson[] entities, Caller caller) {
+        boolean persisted = false;
+        for (int i = 0; i < entities.length; i++) {
+            StatisticalEntity dbEntity = statEntityTranslator.getStatisticalEntityFromJson(entities[i], caller.getCallerId());
+            if (statEntityRepo.existsById(dbEntity.getId())) {
+                persistenceService.merge(dbEntity);
+                persisted = true;
+            } else {
+                persistenceService.persist(dbEntity);
+                persisted = true;
+            }
+        }
+        return persisted;
+    }
+
 }

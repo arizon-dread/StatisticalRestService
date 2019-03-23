@@ -8,7 +8,8 @@ spring:
             ddl-auto: create-drop
     datasource:
         platform: postgres
-        url: jdbc:postgresql://localhost:5432/StatisticalRestService
+        #url: jdbc:postgresql://localhost:5432/StatisticalRestService
+        url: jdbc:postgresql://172.17.0.1:5432/StatisticalRestService
         username: statEntityUser
         password: test123
         driverClassName: org.postgresql.Driver
