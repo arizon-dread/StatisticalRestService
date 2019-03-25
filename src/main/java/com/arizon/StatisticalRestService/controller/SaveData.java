@@ -1,6 +1,6 @@
 package com.arizon.StatisticalRestService.controller;
 
-import com.arizon.StatisticalRestService.DTO.StatisticalEntityJsonToStatisticalEntity;
+import com.arizon.StatisticalRestService.DTO.StatisticalEntityTranslator;
 import com.arizon.StatisticalRestService.Repository.CallerRepository;
 import com.arizon.StatisticalRestService.Repository.StatisticalEntityRepository;
 import com.arizon.StatisticalRestService.model.Caller;
@@ -32,7 +32,7 @@ public class SaveData {
     StatisticalEntityRepository statEntityRepo;
 
     @Autowired
-    StatisticalEntityJsonToStatisticalEntity statEntityTranslator;
+    StatisticalEntityTranslator statEntityTranslator;
     @Autowired
     PersistenceService persistenceService;
 

@@ -11,13 +11,13 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-public class StatisticalEntityJsonToStatisticalEntity {
+public class StatisticalEntityTranslator {
 
     @Autowired
     private CallerRepository callerRepo;
     @Autowired
     private EntityTypeRepository entityTypeRepository;
-    public StatisticalEntityJsonToStatisticalEntity() {}
+    public StatisticalEntityTranslator() {}
 
     public StatisticalEntity getStatisticalEntityFromJson(StatisticalEntityJson jsonObj, long callerId) {
         StatisticalEntity statEntity = new StatisticalEntity();

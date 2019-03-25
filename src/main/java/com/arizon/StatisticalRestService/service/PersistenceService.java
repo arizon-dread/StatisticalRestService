@@ -32,27 +32,49 @@ public class PersistenceService {
     @Transactional
     public void merge(Object entity) {
         entityManager.merge(entity);
+        entityManager.flush();
+        entityManager.close();
     }
 
 
     @Transactional
     public void persist(EntityType entityType) {
         entityManager.persist(entityType);
+        entityManager.flush();
+        entityManager.close();
     }
 
     @Transactional
     public void merge(EntityType entityType) {
         entityManager.merge(entityType);
+        entityManager.flush();
+        entityManager.close();
     }
 
     @Transactional
     public void persist(Caller caller) {
+        for (EntityType type : caller.getEntityTypes()) {
+            if (!entityTypeRepository.existsById(type.getId())) {
+                persist(type);
+            }
+        }
         entityManager.persist(caller);
+        entityManager.flush();
+        entityManager.close();
     }
 
     @Transactional
     public void merge(Caller caller) {
+        for (EntityType type : caller.getEntityTypes()) {
+            if (!entityTypeRepository.existsById(type.getId())) {
+                persist(type);
+            }
+        }
         entityManager.merge(caller);
+        entityManager.flush();
+        entityManager.close();
     }
+
+
 
 }

@@ -1,6 +1,6 @@
 package com.arizon.StatisticalRestService.controller;
 
-import com.arizon.StatisticalRestService.DTO.StatisticalEntityJsonToStatisticalEntity;
+import com.arizon.StatisticalRestService.DTO.StatisticalEntityTranslator;
 import com.arizon.StatisticalRestService.Repository.StatisticalEntityRepository;
 import com.arizon.StatisticalRestService.model.StatisticalEntity;
 import com.arizon.StatisticalRestService.model.StatisticalEntityJson;
@@ -29,7 +29,7 @@ public class GetData {
     StatisticalEntityRepository entityRepo;
 
     @Autowired
-    StatisticalEntityJsonToStatisticalEntity translator;
+    StatisticalEntityTranslator translator;
 
     //TODO: create crudmethods in the StatisticalEntityRepository matching methods.
     @RequestMapping(value = "/getAllEntities", method = RequestMethod.GET)
