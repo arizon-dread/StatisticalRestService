@@ -60,8 +60,8 @@ public class SaveData {
             }
 
         } else if (!StringUtils.isEmpty(callerName)) {
-            caller = callerRepo.findByCallerName(callerName); //TODO: toLower?
-            if (caller.getCallerName().equals(callerName)) {
+            caller = callerRepo.findByCallerName(callerName.toLowerCase());
+            if (caller.getCallerName().equals(callerName.toLowerCase())) {
                 persisted = persistEntity(payload, caller);
             }
         }

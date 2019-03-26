@@ -42,7 +42,7 @@ public class Caller implements Serializable {
         return callerName;
     }
     public void setCallerName(String callerName) {
-        this.callerName = callerName;
+        this.callerName = callerName.toLowerCase();
     }
 
 
