@@ -4,6 +4,7 @@ import com.arizon.StatisticalRestService.DTO.StatisticalEntityTranslator;
 import com.arizon.StatisticalRestService.Repository.StatisticalEntityRepository;
 import com.arizon.StatisticalRestService.model.StatisticalEntity;
 import com.arizon.StatisticalRestService.model.StatisticalEntityJson;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,7 +19,7 @@ import java.util.List;
 /**
  * Created by arizon on 12/7/17.
  */
-
+@Api(tags = "GetData")
 @RestController
 public class GetData {
 
@@ -44,7 +45,7 @@ public class GetData {
         return entities;
     }
 
-    @RequestMapping(value = "getEntitiesBetween", method = RequestMethod.GET)
+    @RequestMapping(value = "/getEntitiesBetween", method = RequestMethod.GET)
     public List<StatisticalEntityJson> getEntitiesBetween(@RequestParam(value="caller") long callerId, @RequestParam(value = "from") Date from, @RequestParam(value = "to") Date to) {
 
         List<StatisticalEntityJson> entities = new ArrayList<>();

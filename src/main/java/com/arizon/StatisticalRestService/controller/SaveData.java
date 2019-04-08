@@ -7,6 +7,7 @@ import com.arizon.StatisticalRestService.model.Caller;
 import com.arizon.StatisticalRestService.model.StatisticalEntity;
 import com.arizon.StatisticalRestService.model.StatisticalEntityJson;
 import com.arizon.StatisticalRestService.service.PersistenceService;
+import io.swagger.annotations.Api;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ import java.util.Optional;
 /**
  * Created by arizon on 12/7/17.
  */
+
+
+@Api(tags = "SaveData")
 @RestController
 public class SaveData {
 

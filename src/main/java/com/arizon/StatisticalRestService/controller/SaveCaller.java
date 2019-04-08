@@ -3,11 +3,13 @@ package com.arizon.StatisticalRestService.controller;
 import com.arizon.StatisticalRestService.Repository.CallerRepository;
 import com.arizon.StatisticalRestService.model.Caller;
 import com.arizon.StatisticalRestService.service.PersistenceService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@Api(tags = "SaveCaller")
 @RestController
 public class SaveCaller {
 
