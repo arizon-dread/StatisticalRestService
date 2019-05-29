@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Date;
 
 public class StatisticalEntityJson {
+    //TODO: Put JsonModels in their own api project, import it in both this and the web client projects.
 
     public StatisticalEntityJson(){}
 
