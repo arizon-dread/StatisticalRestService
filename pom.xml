@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.arizon</groupId>
 	<artifactId>StatisticalRestService</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0</version>
 	<packaging>jar</packaging>
 	<name>StatisticalRestService</name>
 	<description>Demo project for Spring Boot</description>
@@ -51,6 +51,18 @@
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
+		</dependency>
+
+		<!-- arizon -->
+		<dependency>
+			<groupId>com.arizon</groupId>
+			<artifactId>StatisticalApi</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.arizon</groupId>
+			<artifactId>StatisticalApi</artifactId>
+			<version>1.0</version>
 		</dependency>
 	</dependencies>
 

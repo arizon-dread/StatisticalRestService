@@ -4,9 +4,9 @@ import com.arizon.StatisticalRestService.Repository.EntityTypeRepository;
 import com.arizon.StatisticalRestService.model.Caller;
 import com.arizon.StatisticalRestService.model.EntityType;
 import com.arizon.StatisticalRestService.model.StatisticalEntity;
-import com.arizon.StatisticalRestService.model.StatisticalEntityJson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import model.StatisticalEntityJson;
 
 import java.util.Optional;
 

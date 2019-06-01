@@ -2,7 +2,7 @@ package com.arizon.StatisticalRestService.DTO;
 
 import com.arizon.StatisticalRestService.Repository.CallerRepository;
 import com.arizon.StatisticalRestService.model.Caller;
-import com.arizon.StatisticalRestService.model.CallerJson;
+import model.CallerJson;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class CallerTranslator {
@@ -12,10 +12,12 @@ public class CallerTranslator {
 
     public Caller callerJsonToCaller(CallerJson jsonObj) {
         Caller caller = new Caller();
+        EntityTypeTranslator entityTypeTranslator = new EntityTypeTranslator();
+
 
         caller.setCallerName(jsonObj.getCallerName());
         caller.setCallerAddress(jsonObj.getCallerAddress());
-        caller.setEntityTypes(jsonObj.getEntityTypes());
+        caller.setEntityTypes(entityTypeTranslator.getEntitiesFromJson(jsonObj.getEntityTypes()));
 
         return caller;
     }
