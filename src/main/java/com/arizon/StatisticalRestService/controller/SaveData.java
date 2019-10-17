@@ -25,6 +25,7 @@ import java.util.Optional;
 
 @Api(tags = "SaveData")
 @RestController
+@RequestMapping("/")
 public class SaveData {
 
     private Logger log = LoggerFactory.getLogger(this.getClass());

@@ -1,9 +1,8 @@
-server:
-    port: 8080
-    servlet:
-        contextPath: /api
 spring:
-    profiles.actives: "default"
+    profiles.actives: "dev"
+    server:
+        port: 8082
+        contextPath: /api
     application:
         name: StatisticalRestService
     jpa:

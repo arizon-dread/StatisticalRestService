@@ -5,7 +5,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Properties;
 
 public class VersionResponse {
@@ -15,7 +14,7 @@ public class VersionResponse {
 
         final Properties properties = new Properties();
         try {
-            properties.load(this.getClass().getClassLoader().getResourceAsStream("application.properties"));
+            properties.load(this.getClass().getClassLoader().getResourceAsStream("application.yml"));
             version = properties.getProperty("project.version");
         } catch (IOException ioe) {
             log.error(ioe.getMessage());

@@ -18,6 +18,7 @@ import java.util.List;
  **/
 @Api(tags = "GetData")
 @RestController
+@RequestMapping("/")
 public class GetData {
 
     @Autowired

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Api(tags = "SaveCaller")
 @RestController
+@RequestMapping("/")
 public class SaveCaller {
 
     @Autowired
