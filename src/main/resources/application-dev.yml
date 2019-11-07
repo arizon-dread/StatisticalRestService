@@ -1,26 +1,29 @@
+server:
+    port: 8082
+    servlet:
+        contextPath: /api
 spring:
     profiles.actives: "dev"
-    server:
-        port: 8082
-        contextPath: /api
     application:
         name: StatisticalRestService
     jpa:
         #database: POSTGRESQL
-        databasePlatform: "org.hibernate.dialect.PostgreSQL95Dialect"
+        databasePlatform: "org.hibernate.dialect.PostgreSQL9Dialect"
         show-sql: true
         hibernate:
             ddl-auto: create-drop
-            #dialect: "org.hibernate.dialect.PostgreSQL95Dialect"
             jdbc:
                 lob:
                     non_contextual_creation: true
+        properties.hibernate.temp.use_jdbc_metadata_defaults: false
     datasource:
-        platform: postgres
+        platform: postgresql
         url: jdbc:postgresql://localhost:5432/StatisticalRestService
-        #url: jdbc:postgresql://172.17.0.1:5432/StatisticalRestService
         username: statEntityUser
         password: test123
         driverClassName: org.postgresql.Driver
-    project:
-        version: ${project.version}
+project:
+    version: '@project.version@'
+info:
+    app:
+        version: '@project.version@'
