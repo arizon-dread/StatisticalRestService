@@ -27,7 +27,7 @@ public class StatisticalEntityTranslator {
         statEntity.setEntitytype(new EntityType(jsonObj.getEntityType()));
         statEntity.setOccurances(jsonObj.getOccurances());
         statEntity.setTimeStamp(jsonObj.getTimeStamp());
-
+        statEntity.setValue(jsonObj.getValue());
         return statEntity;
     }
     public StatisticalEntityJson getStatisticalEntityJsonFromDbObj(StatisticalEntity dbEntity) {
