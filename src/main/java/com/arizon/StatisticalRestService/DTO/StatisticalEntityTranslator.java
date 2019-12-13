@@ -36,6 +36,7 @@ public class StatisticalEntityTranslator {
         jsonObj.setEntityType(dbEntity.getEntitytype().getUnit());
         jsonObj.setTimeStamp(dbEntity.getTimeStamp());
         jsonObj.setOccurances(dbEntity.getOccurances());
+        jsonObj.setValue(dbEntity.getValue());
 
         return jsonObj;
     }
