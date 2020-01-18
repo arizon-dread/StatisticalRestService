@@ -3,7 +3,8 @@ server:
     servlet:
         contextPath: /api
 spring:
-    profiles: "development"
+    profiles:
+        active: '@spring.profiles.active@'
     application:
         name: StatisticalRestService
     jpa:

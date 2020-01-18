@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 
 public class VersionResponse {
     //@Value("project.version")
-    @Value("${info.app.version:unknown}")
+    @Value("{info.app.version:unknown}")
     String version;
     private Logger log = LoggerFactory.getLogger(this.getClass());
     public VersionResponse() {

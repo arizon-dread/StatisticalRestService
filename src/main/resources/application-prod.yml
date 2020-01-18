@@ -3,7 +3,8 @@ server:
     servlet:
         contextPath: /api
 spring:
-    profiles: "production"
+    profiles:
+        active: 'prod'
     application:
         name: StatisticalRestService
     jpa:

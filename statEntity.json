@@ -1,0 +1,14 @@
+[
+    {
+        "entityType": "g",
+        "timeStamp": "2019-03-12T21:10:00",
+        "occurances": "1",
+        "value": "10000"
+    },
+    {
+        "entityType": "g",
+        "timeStamp": "2019-03-14T19:50:00",
+        "occurances": "1",
+        "value": "10000"
+    }
+]

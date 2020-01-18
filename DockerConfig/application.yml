@@ -1,0 +1,16 @@
+spring:
+    application:
+        name: StatisticalRestService
+    jpa:
+        database: POSTGRESQL
+        show-sql: true
+        hibernate:
+            ddl-auto: create-drop
+    datasource:
+        platform: postgres
+        #url: jdbc:postgresql://host.docker.internal:5432/StatisticalRestService
+        url: jdbc:postgresql://172.18.0.2:5432/StatisticalRestService
+        #url: jdbc:postgresql://postgres:5432/StatisticalRestService
+        username: statEntityUser
+        password: test123
+        driverClassName: org.postgresql.Driver

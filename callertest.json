@@ -1,0 +1,9 @@
+[
+    {
+        "callerName":"tuxpad",
+        "callerAddress":"192.168.1.220",
+        "entityTypes":[
+            {"unit":"g"}
+        ]
+    }
+]
